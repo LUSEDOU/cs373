@@ -1,6 +1,7 @@
 import unittest
 import task
 
+
 class TestSequenceFunctions(unittest.TestCase):
     def failUnlessArraysAlmostEqual(self, first, second, places=7, msg=None):
         """Fail if the two arrays are unequal as determined by their
@@ -8,20 +9,22 @@ class TestSequenceFunctions(unittest.TestCase):
            (default 7) and comparing to zero.
 
            Note that decimal places (from zero) are usually not the same
-           as significant digits (measured from the most signficant digit).
+           as significant digits (measured from the most significant digit).
         """
         if (len(first) != len(second)):
-            raise self.failureException, \
-              (msg or '%r != %r because they have unequal lengths %d & %d', \
-                  (first, second, len(first), len(second)))
+            raise (self.failureException,
+                   (msg or '%r != %r because they have unequal lengths %d & %d',
+                    (first, second, len(first), len(second))))
 
         for i in range(len(first)):
             if isinstance(first[i], list):
-                self.failUnlessArraysAlmostEqual(first[i], second[i], places, msg)
+                self.failUnlessArraysAlmostEqual(
+                    first[i], second[i], places, msg)
             elif round(abs(second[i]-first[i]), places) != 0:
-                raise self.failureException, \
-                (msg or '%r != %r within %r places' % (first, second, places))
-
+                raise (self.failureException,
+                       (msg or '%r != %r within %r places' %
+                        (first, second, places))
+                       )
     # Synonym methods
     assertArrayAlmostEqual = assertArrayAlmostEquals = failUnlessArraysAlmostEqual
 
@@ -165,7 +168,6 @@ class TestSequenceFunctions(unittest.TestCase):
         # ASSERT
         self.assertArrayAlmostEquals(expected_result, actual_result, 4)
 
-
     def test_dataset8(self):
         # ARRANGE
         expected_result = [[0.01105, 0.02464, 0.06799, 0.04472, 0.024651],
@@ -173,7 +175,7 @@ class TestSequenceFunctions(unittest.TestCase):
                            [0.00739, 0.00894, 0.11272, 0.35350, 0.04065],
                            [0.00910, 0.00715, 0.01434, 0.04313, 0.03642]]
 
-        task.colors = [['red', 'green', 'green', 'red','red'],
+        task.colors = [['red', 'green', 'green', 'red', 'red'],
                        ['red', 'red', 'green', 'red', 'red'],
                        ['red', 'red', 'green', 'green', 'red'],
                        ['red', 'red', 'red', 'red', 'red']]
@@ -227,6 +229,7 @@ class TestSequenceFunctions(unittest.TestCase):
 
         # ASSERT
         self.assertArrayAlmostEquals(expected_result, actual_result, 4)
+
 
 if __name__ == '__main__':
     unittest.main()
